@@ -7,15 +7,20 @@
   {{ if .Params.subtitle }}{{ $.Scratch.Set "subtitle" .Params.subtitle }}{{ end }}
   {{ if .Params.bigimg }}{{ $.Scratch.Set "bigimg" .Params.bigimg }}{{ end }}
 {{ end }}
+{{ $featimg := $.Scratch.Get "featured_image" }}
 {{ $bigimg := $.Scratch.Get "bigimg" }}
 
-{{ if or $bigimg ($.Scratch.Get "title") }}
+{{ if or $bigimg $featimg ($.Scratch.Get "title") }}
   {{ if $bigimg }}
     <div id="header-big-imgs" data-num-img={{len $bigimg}} {{range $i, $img := $bigimg}}data-img-src-{{add $i 1}}="{{$img.src | absURL }}" {{ if $img.desc}}data-img-desc-{{add $i 1}}="{{$img.desc}}"{{end}}{{end}}></div>
   {{ end }}
 
+  {{ if $featimg }}
+    <div id="header-big-imgs" data-num-img="1" data-img-src-1="{{$featimg}}"></div>
+  {{ end }}
+
   <header class="header-section {{ if $bigimg }}has-img{{ end }}">
-    {{ if $bigimg }}
+    {{ if or $bigimg $featimg }}
       <div class="intro-header big-img">
         {{ $subtitle := $.Scratch.Get "subtitle" }}
         <div class="container">
