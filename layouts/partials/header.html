@@ -6,6 +6,7 @@
   {{ $.Scratch.Set "title" .Title }}
   {{ if .Params.subtitle }}{{ $.Scratch.Set "subtitle" .Params.subtitle }}{{ end }}
   {{ if .Params.bigimg }}{{ $.Scratch.Set "bigimg" .Params.bigimg }}{{ end }}
+  {{ if .Params.featimg }}{{ $.Scratch.Set "featimg" .Params.featimg }}{{ end }}
 {{ end }}
 {{ $featimg := $.Scratch.Get "featured_image" }}
 {{ $bigimg := $.Scratch.Get "bigimg" }}
